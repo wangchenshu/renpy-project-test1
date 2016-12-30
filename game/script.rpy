@@ -10,6 +10,10 @@ image logo right = Image("images/logo.jpg", xalign=1.0)
 image walter happy = "char/walter.jpg"
 image eileen happy = im.Scale("char/eileen.jpg", 300, 300)
 
+init:
+    $ relation = 0
+    $ pi = 3.1415926535
+
 # The game starts here.
 
 label start:
@@ -48,7 +52,8 @@ label start:
 
     label walter:
         scene bg room
-        play music "1.ogg"
+        #play music "1.ogg"
+        voice "1.ogg"
         show walter happy
         walter "This is walter test, and play music canon."
         ".:. Good Ending."
@@ -58,4 +63,29 @@ label start:
         walter "walter go home"
     # This ends the game.
 
+    menu:
+        "Hello, 1 + 1 = ?"
+
+        "11":
+            eileen "sorry"
+            $ relation = 4
+
+        "1+1":
+            eileen "wrong answer"
+            $ relation = 5
+
+        "2":
+            eileen "nice work"
+            $ relation = 6
+
+    eileen "Thansk for your help."
+
+    if relation == 1:
+        walter "gift [relation]"
+    elif relation == 2:
+        walter "gift [relation]"
+    else:
+        walter "gift [relation]"
+
+    "{i}PI{/i} is {color=#0f0}{u}[pi:.3]{/u}{/color}{nw}"
     return
