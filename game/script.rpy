@@ -3,14 +3,18 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define eileen = Character("Eileen", color="#c8ffc8")
-define walter = Character("Walter", color="#c8c8ff")
-
-image logo right = Image("images/logo.jpg", xalign=1.0)
-image walter happy = "char/walter.jpg"
-image eileen happy = im.Scale("char/eileen.jpg", 300, 300)
-
 init:
+    image logo right = Image("images/logo.jpg", xalign=1.0)
+    image walter happy = "char/walter.jpg"
+    image eileen happy = im.Scale("char/eileen.jpg", 300, 300)
+    image side walter happy = "char/side_walter.jpg"
+    image side eileen happy = "char/side_eileen.jpg"
+    image jack = im.Grayscale("char/jack.jpg")
+    image jack_snowflakes = SnowBlossom("char/jack.jpg")
+
+    define eileen = Character("Eileen", color="#c8ffc8", image="eileen")
+    define walter = Character("Walter", color="#c8c8ff", image="walter")
+
     $ relation = 0
     $ pi = 3.1415926535
 
@@ -30,6 +34,20 @@ label start:
 
     show logo right
     show eileen happy
+
+    show jack:
+        #xpos 0      # ATL 屬性陳述 (xpos)：圖片的 x 軸位置，與螢幕的 x 軸 = 0 座標點重合
+        #ypos 50
+        ease 1.0 pos (0.0, 1.0)      # ATL 屬性陳述 (pos)：移動圖片到指定位置
+        anchor (0.0, 1.0)   # ATL 屬性陳述 (anchor)：移動錨點到指定位置
+        ease 2.0 alpha 0.5
+        ease 2.0 rotate 30
+        ease 1.0 align (0.0, 4.0)
+        ease 1.0 align (0.0, 3.0)
+        ease 1.0 align (0.0, 2.0)
+        ease 1.0 align (0.0, 1.0)
+        linear 2.0 rotate -30
+        repeat
 
     # These display lines of dialogue.
 
@@ -57,7 +75,7 @@ label start:
         show walter happy
         walter "This is walter test, and play music canon."
         ".:. Good Ending."
-        show eileen happy at right #behind walter with dissolve
+        show eileen happy at topright #behind walter with dissolve
         eileen "hello, i am eileen"
         hide walter
         walter "walter go home"
