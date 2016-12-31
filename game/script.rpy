@@ -15,8 +15,15 @@ init:
     define eileen = Character("Eileen", color="#c8ffc8", image="eileen")
     define walter = Character("Walter", color="#c8c8ff", image="walter")
 
+    define blight = Fade(0.25, 0.5, 1.5, color = "#FFF")    # 爆炸轉場特效，與 screen 無關
+    define bar_value = 0.3
+
+    screen bar_test:
+        bar value AnimatedValue(bar_value, delay = 0.5)
+        #bar value bar_value xmaximum 0.3
+
     $ relation = 0
-    $ pi = 3.1415926535
+    $ PI = 3.1415926535
 
 # The game starts here.
 
@@ -26,6 +33,9 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
+    show screen bar_test
+
+    with blight
     scene bg room2
 
     # This shows a character sprite. A placeholder is used, but you can
@@ -56,6 +66,8 @@ label start:
     eileen "You've created a new Ren'Py game."
 
     eileen "Once you add a story, pictures, and music, you can release it to the world!"
+
+    $ bar_value = 0.5
 
     menu:
         "It's a story with pictures.":
@@ -105,5 +117,5 @@ label start:
     else:
         walter "gift [relation]"
 
-    "{i}PI{/i} is {color=#0f0}{u}[pi:.3]{/u}{/color}{nw}"
+    "{i}PI{/i} is {color=#0f0}{u}[PI:.3]{/u}{/color}{nw}"
     return
